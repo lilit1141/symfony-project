@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8" />
+    {% block metadata %}
+            <meta http-equiv="Content-Language" content="en">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+            <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+            <meta name="title" content="AAROGYA MEDSURG LLC is a Pharmacy - Wholesalers licensed to practice in California.">
+            <meta name="description" content="AAROGYA MEDSURG LLC is a Pharmacy - Wholesalers licensed to practice in California. Our management team has a combined years of commitment to quality.">
+            <meta name="author" content="AAROGYA MEDSURG LLC ">
+    {% endblock %}
+        <title>Project</title>
+    {% block stylesheets %}
+            <link rel="stylesheet" type="text/css" href="{{ asset('jquery_components/bootstrap/dist/css/bootstrap.min.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('jquery_components/bootstrap/dist/css/bootstrap-theme.min.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/style.css') }}">
+    {% endblock %}
+        <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('bundles/app/images/favicon/apple-icon-57x57.png') }}">
+        <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('bundles/app/images/favicon/apple-icon-60x60.png') }}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('bundles/app/images/favicon/apple-icon-72x72.png') }}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('bundles/app/images/favicon/apple-icon-76x76.png') }}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('bundles/app/images/favicon/apple-icon-114x114.png') }}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('bundles/app/images/favicon/apple-icon-120x120.png') }}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('bundles/app/images/favicon/apple-icon-144x144.png') }}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('bundles/app/images/favicon/apple-icon-152x152.png') }}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('bundles/app/images/favicon/apple-icon-180x180.png') }}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('bundles/app/images/favicon/android-icon-192x192.png') }}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('bundles/app/images/favicon/favicon-32x32.png') }}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('bundles/app/images/favicon/favicon-96x96.png') }}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('bundles/app/images/favicon/favicon-16x16.png') }}">
+        <link rel="manifest" href="{{ asset('bundles/app/images/favicon/manifest.json') }}">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="{{ asset('bundles/app/images/favicon/ms-icon-144x144.png') }}">
+        <meta name="theme-color" content="#ffffff">
+        <link rel="icon" type="image/x-icon" href="{{ asset('bundles/app/images/favicon/ms-icon-310x310.png') }}" />
+</head>
+<body>
+{% block body %}
+    {% block menu %}
+            <nav class="navbar navbar-fixed-top">
+                    <div class="container-fluid">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                            <div class="navbar-header">
+
+                                    <a itemscope itemtype="http://schema.org/Pharmacy" itemprop="url" class="navbar-brand" href="{{ path('homepage') }}"><img itemprop="logo" class="img-responsive img-circle logo" src="{{ asset('bundles/app/images/logo.png') }}"></a>
+                            </div>
+
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                    <ul class="nav navbar-nav">
+                                        {#{{ knp_menu_render('AppBundle:Builder:topMenu', { 'template': 'Menu/knp_menu.html.twig', 'currentAsLink': false, 'id':'navigation'}) }}#}
+                                            <li class="active"><a itemprop="url" href="{{ path('homepage') }}">Home<span class="sr-only">(current)</span></a></li>
+
+                                        {% if app.user == null %}
+                                                <li><a itemprop="url" href="{{ path('fos_user_security_login') }}">Login</a></li>
+                                        {% else %}
+                                                <li><a href="
+                                        {% if app.user.userSettings %}
+                                        {{ path('user_settings_show') }}{% else %}{{ path('user_settings') }}{% endif %}">Credit Application</a></li>
+                                                <li><a href="{{ path('my_bag') }}" class="selected_infos">Bag&nbsp;</a></li>
+                                                <li class="dropdown">
+                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> &nbsp;
+                                                            {% if app.user.userSettings %}
+                                                                {% set name = app.user.userSettings.tradeName|split(" ")%}
+                                                                {{ name[0] }}{% else %}{{ app.user.lastname }}{% endif %}<span class="caret"></span></a>
+                                                        <ul class="dropdown-menu">
+                                                            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                                                    <li><a href="{{ path('sonata_admin_dashboard') }}"><span class="glyphicon glyphicon-book">&nbsp;Dashboard</span></a></li>
+                                                            {% endif %}
+                                                                <li><a href="{{ path('submit_order') }}"><span class="glyphicon glyphicon-screenshot"></span>&nbsp;Orders</a></li>
+                                                            {#<li><a href="{{ path('fos_user_profile_edit') }}"><span class="glyphicon glyphicon-edit"></span>&nbsp;Edit Profile</a></li>#}
+                                                            {#<li role="separator" class="divider"></li>#}
+                                                            {#<li><a href="{{ path('fos_user_profile_show') }}"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;Profile</a></li>#}
+                                                                <li role="separator" class="divider"></li>
+                                                                <li><a href="{{ path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</a></li>
+                                                        </ul>
+                                                </li>
+                                        {% endif %}
+                                    </ul>
+                            </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+            </nav>
+    {% endblock %}
+    {% block banner %}
+
+    {% endblock %}
+    {% block content %}
+    {% endblock %}
+    {% block footer %}
+            <footer class="footer">
+
+            </footer>
+    {% endblock %}
+{% endblock %}
+<script type="text/javascript" src="{{ asset('jquery_components/jquery/dist/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('jquery_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript">
+    var text = $('.dropdown-toggle').text();
+    $('.dropdown-toggle').html('<span class="glyphicon glyphicon-user"></span> &nbsp;'+text+'&nbsp;<span class="caret"></span>')
+</script>
+{% if app.user %}
+        <script type="text/javascript" src="{{ asset('bundles/app/js/main.js') }}"></script>
+{% endif %}
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-92016315-1', 'auto');
+    ga('send', 'pageview');
+</script>
+{% block javascripts %}
+{% endblock %}
+</body>
+</html>

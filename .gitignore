@@ -12,4 +12,3 @@
 .idea/
 /composer.phar
 app/logs/
-src/AppBundle/Admin/

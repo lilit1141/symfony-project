@@ -29,13 +29,6 @@ class Category
      */
     private $name;
 
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-
     /**
      * @ORM\OneToMany(targetEntity="BlogPost", mappedBy="category")
      */

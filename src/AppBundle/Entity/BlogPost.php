@@ -44,6 +44,12 @@ class BlogPost
 
 
     /**
+     * @var
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="blogPosts")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     */
+    private $category;
+    /**
      * Get id
      *
      * @return integer 

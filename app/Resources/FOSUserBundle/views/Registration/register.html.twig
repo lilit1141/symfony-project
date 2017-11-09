@@ -68,6 +68,7 @@
                                 {{ form_label(form.phone, null, {'label_attr': {'class': 'col-sm-6 col-md-5 control-label'}}) }}
 
                                 <div class="col-sm-6 col-md-7">
+                                    {{ form_errors(form.phone) }}
                                     {{ form_widget(form.phone) }}
                                 </div>
                             </div>
